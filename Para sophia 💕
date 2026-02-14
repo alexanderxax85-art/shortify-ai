@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jardín Virtual para Sophia</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="garden">
+        <div class="sky"></div>
+        <div class="lights"></div>
+        <div class="petals"></div>
+        <div class="message">
+            <h1>Bienvenida a nuestro jardín, Sophia 💖</h1>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.garden {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #ffcccc 0%, #ffe6e6 50%, #ffffff 100%);
+}
+
+.sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: radial-gradient(circle at 50% 50%, #ffb3ba, #ffcccc);
+}
+
+.lights {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 80%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.petals {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.petal {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMTAiIGZpbGw9IiNmZmQ3MDAiLz4KPHBhdGggZD0iTTAgMTBjMC02LjEgNS05IDEwLTkgczEwIDIuOSAxMCA5LTEwIDktMTAgOSIgZmlsbD0iI2ZmZDcwMCIvPgo8L3N2Zz4=') no-repeat center;
+    animation: float 10s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-20px) rotate(360deg); opacity: 0; }
+}
+
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const petalsContainer = document.querySelector('.petals');
+    const numPetals = 20; // Número de pétalos
+
+    for (let i = 0; i < numPetals; i++) {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.animationDelay = Math.random() * 10 + 's';
+        petalsContainer.appendChild(petal);
+    }
+});
